@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import ch.liip.timeforcoffee.R;
 import ch.liip.timeforcoffee.adapter.DepartureListAdapter;
@@ -40,13 +42,17 @@ public class DepartureListFragment extends ListFragment implements SwipeRefreshL
     private Callbacks mCallbacks = sDummyCallbacks;
 
     public interface Callbacks {
+        public void onDepartureSelected(Departure departure);
+
         public void onRefresh();
     }
 
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onRefresh() {
-        }
+        public void onDepartureSelected(Departure departure) {}
+
+        @Override
+        public void onRefresh() {}
     };
 
     /**
@@ -101,6 +107,13 @@ public class DepartureListFragment extends ListFragment implements SwipeRefreshL
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }, 100);
+    }
+
+    @Override
+    public void onListItemClick(ListView listView, View view, int position, long id) {
+        super.onListItemClick(listView, view, position, id);
+        Log.d(this.getClass().getName(), "position " + position + " clicked!");
+        mCallbacks.onDepartureSelected(mDepartureListAdapter.getDeparture(position));
     }
 
     public void showProgresLayout(boolean show) {

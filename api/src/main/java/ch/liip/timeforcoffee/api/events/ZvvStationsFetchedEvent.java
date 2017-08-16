@@ -16,6 +16,8 @@ public class ZvvStationsFetchedEvent {
     }
 
     public List<Station> getStations() {
+        // TODO could be filtered by favorites / recent / etc
+
         return stations;
     }
 }

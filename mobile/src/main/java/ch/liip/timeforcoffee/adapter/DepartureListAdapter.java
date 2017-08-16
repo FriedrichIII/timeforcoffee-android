@@ -143,4 +143,8 @@ public class DepartureListAdapter extends ArrayAdapter<Departure> {
         this.mDepartures.addAll(mDepartures);
         notifyDataSetChanged();
     }
+
+    public Departure getDeparture(Integer position) {
+        return this.mDepartures.get(position);
+    }
 }

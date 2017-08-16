@@ -15,6 +15,7 @@ public class ZvvStationboardFetchedEvent {
     }
 
     public List<Departure> getDepartures() {
+        // TODO this list could be filtered given the favorite stations/lines/trips
         return departures;
     }
 }

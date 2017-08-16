@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import ch.liip.timeforcoffee.R;
+import ch.liip.timeforcoffee.api.Departure;
 import ch.liip.timeforcoffee.api.Station;
 import ch.liip.timeforcoffee.fragment.DepartureListFragment;
 import ch.liip.timeforcoffee.fragment.StationMapFragment;
@@ -30,6 +32,7 @@ public class DeparturesActivity extends AppCompatActivity implements SlidingUpPa
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
+            // FIXME check how this behaves.
             //we don't want to restore this activity => go back to default activity
             navigateUpTo(new Intent(this, MainActivity.class));
         }
@@ -81,6 +84,14 @@ public class DeparturesActivity extends AppCompatActivity implements SlidingUpPa
     @Override
     public void onRefresh() {
         mPresenter.onRefreshView();
+    }
+
+    @Override
+    public void onDepartureSelected(Departure departure) {
+        // TODO call line.
+        Log.d(this.getClass().getName(), "Departure selected: " + departure.getName() + " " + departure.getTo());
+
+
     }
 
     @Override

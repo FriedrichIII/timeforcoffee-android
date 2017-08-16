@@ -97,7 +97,10 @@ public class MainPresenter implements Presenter, OnLocationUpdatedListener {
     }
 
     private void startLocation() {
+        Log.d(this.getClass().getName(), "Start location discovery");
+        // FIXME Check how to make the permission screen appear.
         if (!permissionsChecker.LacksPermission(locationPermission)) {
+            // FIXME something doesn't seems to be working when the location thing is not active at the start.
 
             if (!SmartLocation.with(mActivity).location().state().locationServicesEnabled()) {
                 SnackBars.showLocalisationServiceOff(mActivity, new View.OnClickListener() {
@@ -114,9 +117,12 @@ public class MainPresenter implements Presenter, OnLocationUpdatedListener {
             LocationParams locationParams = new LocationParams.Builder().setAccuracy(LocationAccuracy.MEDIUM).setDistance(LOCATION_SMALLEST_DISPLACEMENT).setInterval(LOCATION_INTERVAL).build();
             smartLocation.location().config(locationParams).start(this);
 
+
         } else {
+            Log.d(this.getClass().getName(), "Start location ask permission");
             permissionsChecker.RequestPermission(mActivity, locationPermission, PERMISSION_REQUEST_CODE, mActivity.getResources().getString(R.string.permission_message));
         }
+
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -149,6 +155,7 @@ public class MainPresenter implements Presenter, OnLocationUpdatedListener {
         Log.i(TAG, "onLocationUpdated : lat = " + location.getLatitude() + " , long = " + location.getLongitude());
         mLastLocation = location;
         loadStations();
+        Log.d(this.getClass().getName(), "Location updated");
     }
 
     private void loadStations() {

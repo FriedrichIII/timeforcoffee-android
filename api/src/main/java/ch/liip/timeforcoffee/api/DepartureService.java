@@ -44,6 +44,7 @@ public class DepartureService {
         ArrayList<Departure> departures = new ArrayList<>();
 
         for(ch.liip.timeforcoffee.opendata.Journey journey : event.getStationboards()) {
+            Log.d(this.getClass().getName(), "Found Journey to " + journey.getTo() + " with transport "+ journey.getName());
             departures.add(DepartureMapper.fromOpenData(journey));
         }
         eventBus.post(new DeparturesFetchedEvent(departures));

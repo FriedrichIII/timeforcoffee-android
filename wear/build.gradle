@@ -6,7 +6,8 @@ android {
     buildToolsVersion project.BUILD_TOOL
 
     defaultConfig {
-        applicationId project.PACKAGE_NAME
+        applicationId "ch.livinggames.timefortea"
+//        applicationId project.PACKAGE_NAME
         minSdkVersion project.MIN_SDK
         targetSdkVersion project.TARGET_SDK
         versionCode project.VERSION_CODE

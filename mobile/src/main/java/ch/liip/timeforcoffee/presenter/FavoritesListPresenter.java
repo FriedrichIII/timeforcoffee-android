@@ -44,6 +44,7 @@ public class FavoritesListPresenter implements Presenter {
         mFragment = null;
     }
 
+    // TODO handle favorite lignes and favorite trip update too.
     public void updateFavorites() {
         List<Station> favs = mFavoriteDataSource.getAllFavorites();
 
